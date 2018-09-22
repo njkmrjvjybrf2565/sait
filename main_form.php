@@ -16,9 +16,9 @@ function auth ($uname, $psw ) {
 
 	$BD = mysqli_connect('localhost', 'root', '', 'testtt') OR DIE('Ошибка подключения к базе данных');
 
-	$sql = "SELECT `user_id` FROM `signup` WHERE `username`=$uname AND `password`=$psw";
+	$sql = "SELECT `user_id` FROM `signup` WHERE `username`='$uname' AND `password`=SHA($psw)";
 	$query = mysqli_query($BD, $sql) or 
-		die("<p>Невозможно выполнить запрос: " . mysql_error() . ". Ошибка произошла в строке " . __LINE__ . "</p>");
+		die("<p>Невозможно выполнить запрос: " . mysqli_error($BD) . ". Ошибка произошла в строке " . __LINE__ . "</p>");
 
 
 
@@ -27,17 +27,22 @@ function auth ($uname, $psw ) {
 		return $error;
 	}
 
-	session_start();
-
-	$_SESSION['username'] = $uname;
-	$_SESSION['password'] = $psw;
-	mysqli_close($BD);
 	return true;
 }
 
 if(isset($_POST['reg'])){
+
+	/*$uname = $_POST['username'];
+	$psw = $_POST['password'];
+	if (!empty($uname) && !empty($psw)) { 
+		session_start();
+		$_SESSION['username'] = $uname;
+		$_SESSION['password'] = $psw;
+	}*/
+	
 	require("registration_form.php");
 	exit('<meta http-equiv="refresh" content="0; url=registration_form.php" />');
+	//echo '<meta http-equiv="refresh" content="0; url=registration_form.php" />';
 }   
 
 
