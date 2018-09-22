@@ -19,7 +19,7 @@ if(isset($_POST['Reg'])){
 			echo 'Логин уже существует';
 		}
 	}
-}
+} 
 
 if(isset($_POST['Reg'])){
 if (empty($UserName) or empty($Password1) or empty($Password2))
