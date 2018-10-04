@@ -5,7 +5,7 @@ body{
 .container{
  width:450px;
  background-color: rgba(24, 33, 52, 0.7);
- margin: 200px auto 0 auto;
+ margin: 130px auto 0 auto;
  text-align: center;
  padding-bottom: 20px;
  padding-top: 30px;
@@ -18,14 +18,19 @@ body{
  border: 5px solid #1a394f;
  border-radius: 50%;
 }
-
-input[type="text"],input[type="password"]{
+input[type="text"],input[type="password"],input[type="email"]{
  width: 300px;
  height:50px;
  font-size: 18px;
  margin-bottom: 25px;
  border-radius: 4px;
  padding-left: 40px;
+}
+.oglav
+{
+font-size:50;
+color: #2ca8c6;
+margin: -75px 20px 50px 20px;
 }
 .dws-input input:hover{
  box-shadow: 0 0 6px 3px rgba(58, 219, 253, 0.35);
@@ -55,11 +60,15 @@ input[type="text"],input[type="password"]{
  color: #2c536c;
 }
 
-.dws-input:nth-child(2)::before{
+.dws-input:nth-child(3)::before{
+    content: "\f0e0";
+}
+
+.dws-input:nth-child(4)::before{
     content: "\f023";
 }
 
-.dws-input:nth-child(3)::before{
+.dws-input:nth-child(5)::before{
     content: "\f023";
 }
 

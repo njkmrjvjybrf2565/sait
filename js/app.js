@@ -61,7 +61,7 @@ function onload(params) {
         for (let i = 0; i < balls.length; i++) {
             if (balls[i].otskok < 5){
                 draw(balls[i]);
-            move(balls[i]);
+                move(balls[i]);
             }
             
         }

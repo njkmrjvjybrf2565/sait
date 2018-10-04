@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            Privet mir!
+           Привет!
         </title>
         <style>
             canvas{
@@ -13,7 +13,7 @@
     </head>
     <body onload="onload()">
         <p> 
-            <input type = "button" onclick = "add()" value = "Add ball">
+            <input type = "button" onclick = "add()"  value = "Add ball">
                 
     </p>
         <canvas id="elwyn" width="720" height="640" ></canvas>

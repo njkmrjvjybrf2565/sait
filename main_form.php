@@ -1,48 +1,35 @@
 <?php
-//error_reporting(0);
-
 function auth ($uname, $psw ) {
 	$error = '';
 	if(!$uname) {
-        $error = 'Не указан логин';
-        return $error;
+		echo "<script>alert(\"Не указан логин!\");</script>";
+		exit('<meta http-equiv="refresh" content="0; url=main_form.php" />');
     } 
     elseif(!$psw) {
-        $error = 'Не указан пароль';
-        return $error;
+		echo "<script>alert(\"Не указан пароль!\");</script>";
+		exit('<meta http-equiv="refresh" content="0; url=main_form.php" />');
     }
-
-    //connect();
-
 	$BD = mysqli_connect('localhost', 'root', '', 'testtt') OR DIE('Ошибка подключения к базе данных');
-
-	$sql = "SELECT `user_id` FROM `signup` WHERE `username`='$uname' AND `password`=SHA($psw)";
+	mysqli_query($BD,"SET NAMES utf8");
+	$sql = "SELECT `user_id` FROM `signup` WHERE `username`='$uname' AND `password`=SHA('$psw')";
 	$query = mysqli_query($BD, $sql) or 
 		die("<p>Невозможно выполнить запрос: " . mysqli_error($BD) . ". Ошибка произошла в строке " . __LINE__ . "</p>");
 
 
 
 	if(mysqli_num_rows($query) == 0) {
-		$error = 'Пользователь с указанными данными не зарегистрирован';
-		return $error;
+		/*$error = 'Пользователь с указанными данными не зарегистрирован';
+		return $error;*/
+		echo "<script>alert(\"Пользователь с указанными данными не существует! \");</script>";
+		exit('<meta http-equiv="refresh" content="0; url=main_form.php" />');
 	}
 
 	return true;
 }
 
 if(isset($_POST['reg'])){
-
-	/*$uname = $_POST['username'];
-	$psw = $_POST['password'];
-	if (!empty($uname) && !empty($psw)) { 
-		session_start();
-		$_SESSION['username'] = $uname;
-		$_SESSION['password'] = $psw;
-	}*/
-	
 	require("registration_form.php");
 	exit('<meta http-equiv="refresh" content="0; url=registration_form.php" />');
-	//echo '<meta http-equiv="refresh" content="0; url=registration_form.php" />';
 }   
 
 
@@ -51,7 +38,7 @@ if(isset($_POST['avt'])) {
 	$psw = $_POST['password'];
 
 	if (empty($uname) or empty($psw)) { 
-		echo "<script>alert(\"Введите данные!\");</script>"; 
+		echo "<script>alert(\"Введите недостающие данные!\");</script>"; 
 	}
 	else {
 		$auth_result = auth($uname, $psw);
@@ -63,6 +50,10 @@ if(isset($_POST['avt'])) {
 	}		
 }
 
+
+
+
+// action = "" это - какой обработчик будет принимать данные с формы. пустые кавычки - оносительный путь
 ?>
 
 <html lang="ru">
@@ -75,7 +66,7 @@ if(isset($_POST['avt'])) {
 <body >
 <div class="container">
 	<img src="img/user.jpg">
-	<form method = "POST" >
+	<form method = "POST" autocomplete ="off">
 		<div class="dws-input">
 			<input type="text" name="username" placeholder="Введите логин">
 		</div>
